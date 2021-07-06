@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>메인 페이지</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    {% if get_flashed_messages() %} 
+      {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    {% if session.get('user') %}
+      <a href="/body_edit">글 작성</a>
+      <a href="/logout">로그 아웃</a>
+    {% else %}
+      <a href="/login">로그인</a>
+    {% endif %}
+
+    {% if info %}
+      {% for i in info %}
+        <a href="/body/{{i[0]}}">{{ i[0] }}</a>
+        {{ i[1] }}
+        {{ i[2] }}
+      {% endfor %}
+    {% else %}
+    {% endif %}
+  </body>
+</html>
