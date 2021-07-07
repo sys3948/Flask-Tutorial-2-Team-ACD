@@ -7,8 +7,23 @@
 </head>
 <body>
     제목 : {{contents[0]}}
-    글쓴이 : {{contents[1]}}
+    글쓴이 : {{contents[3]}}
     작성일 : {{contents[2]}}
-    내용 : {{contents[3]}}
+    내용 : {{contents[1]}}
+
+    {% if comments %}
+    댓글 : 
+      {% for comment in comments %}
+        작성자 : {{ comment[0] }}
+        작성일 : {{ comment[2] }}
+        내용 : {{ comment[1] }}
+      {% endfor %}
+    {% endif %}
+
+    댓글 작성
+    <form action="/comment/{{id}}" method="post">
+      <textarea name="comment" placeholder="댓글을 작성해주세요."></textarea>
+      <input type="submit" value="작성" />
+    </form>
 </body>
 </html>

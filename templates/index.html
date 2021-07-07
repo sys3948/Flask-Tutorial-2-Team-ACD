@@ -11,17 +11,18 @@
       {% endfor %}
     {% endif %}
 
-    {% if session.get('user') %}
+    {% if session.get('id') %}
       <a href="/body_edit">글 작성</a>
       <a href="/logout">로그 아웃</a>
     {% else %}
       <a href="/login">로그인</a>
+      <a href="/regis">회원가입</a>
     {% endif %}
 
     {% if info %}
       {% for i in info %}
-        <a href="/body/{{i[0]}}">{{ i[0] }}</a>
-        {{ i[1] }}
+        <a href="/body/{{i[0]}}">{{ i[1] }}</a>
+        {{ i[3] }}
         {{ i[2] }}
       {% endfor %}
     {% else %}
