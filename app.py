@@ -71,7 +71,31 @@ def body_edit():
         cur.close()
         conn.close()
         return redirect('/')
-    return render_template('body_edit.html')
+    return render_template('body_edit.html', body = None)
+
+@app.route('/body_update/<id>', methods=['GET', "POST"])
+def body_update(id):
+    if not 'id' in session:
+        flash('로그인을 해주세요.')
+        return redirect('/login')
+    conn = pymysql.connect(host='192.168.111.133', port=3306, user=m_info.account_c, passwd=m_info.password_c, database='page')
+    cur = conn.cursor()
+    if request.method == 'POST':
+        cur.execute("update posts set title = '%s', body='%s' where posts_id = %s" %(request.form.get('title'), request.form.get('body'), id))
+        conn.commit()
+        cur.close()
+        conn.close()
+        flash('게시글 수정을 했습니다.')
+        return redirect('/body/'+id)
+
+    cur.execute("select posts_id, title, body from posts where posts_id = '%s'" %(id))
+    body = cur.fetchone()
+    cur.close()
+    conn.close()
+    if session.get('id') != body[0]:
+        flash('작성자가 아닙니다.')
+        return redirect('/')
+    return render_template('body_edit.html', body = body)
 
 @app.route('/body/<id>')
 def body(id):

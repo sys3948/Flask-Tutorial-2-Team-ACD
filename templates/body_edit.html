@@ -5,10 +5,18 @@
       <meta charset="utf-8">
     </head>
     <body>
-      <form action="/body_edit" method="post">
-        <input type="text" name="title" placeholder="제목" />
-        <textarea name="body" placeholder="내용"></textarea>
-        <input type="submit" value="저장" />
-      </form>
+      {% if body %}
+        <form action="/body_update/{{body[0]}}" method="post">
+          <input type="text" name="title" placeholder="제목" value="{{body[1]}}" />
+          <textarea name="body" placeholder="내용">{{body[2]}}</textarea>
+          <input type="submit" value="저장" />
+        </form>
+      {% else %}
+        <form action="/body_edit" method="post">
+          <input type="text" name="title" placeholder="제목" />
+          <textarea name="body" placeholder="내용"></textarea>
+          <input type="submit" value="저장" />
+        </form>
+      {% endif %}
     </body>
 </html>
