@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>댓글 수정</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>댓글 수정.</h1>
+    <form action="/comment_update/{{comment[0]}}" method="post">
+      <textarea name="comment">{{comment[1]}}</textarea>
+      <input type="submit" value="수정" />
+    </form>
+  </body>
+</html>

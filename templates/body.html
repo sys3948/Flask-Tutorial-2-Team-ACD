@@ -7,6 +7,9 @@
 </head>
 <body>
     <a href="/body_update/{{id}}">글 수정</a>
+    {% if session.get('id') %}
+    <a href="/body_delete/{{id}}">게시글 삭제.</a>
+    {% endif %}
     제목 : {{contents[0]}}
     글쓴이 : {{contents[3]}}
     작성일 : {{contents[2]}}
@@ -18,6 +21,8 @@
         작성자 : {{ comment[0] }}
         작성일 : {{ comment[2] }}
         내용 : {{ comment[1] }}
+        <a href="/comment_update/{{comment[3]}}">수정</a>
+        <a href="/comment_delete/{{comment[3]}}">삭제</a>
       {% endfor %}
     {% endif %}
 
